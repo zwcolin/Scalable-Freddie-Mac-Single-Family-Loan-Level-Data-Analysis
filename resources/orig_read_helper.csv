@@ -1,0 +1,32 @@
+col_idx,name,dtype,length
+0,Credit Score,float16,4
+1,First Payment Date,float32,6
+2,First Time Homebuyer Flag,str,1
+3,Maturity Date,float32,6
+4,Metropolitan Statistical Area (MSA) Or Metropolitan Division,float32,5
+5,Mortgage Insurance Percentage (MI %),float16,3
+6,Number of Units,float16,2
+7,Occupancy Status,str,1
+8,Original Combined Loan-to-Value (CLTV),float16,3
+9,Original Debt-to-Income (DTI) Ratio,float16,3
+10,Original UPB,float64,12
+11,Original Loan-to-Value (LTV),float16,3
+12,Original floaterest Rate,float32,6
+13,Channel,str,1
+14,Prepayment Penalty Mortgage (PPM) Flag,str,1
+15,Amortization Type (Formerly Product Type),str,5
+16,Property State,str,2
+17,Property Type,str,2
+18,Postal Code,float32,5
+19,Loan Sequence Number,str,12
+20,Loan Purpose,str,1
+21,Original Loan Term,float16,3
+22,Number of Borrowers,float16,2
+23,Seller Name,str,60
+24,Servicer Name,str,60
+25,Super Conforming Flag,str,1
+26,Pre-HARP Loan Sequence Number,str,12
+27,Program Indicator,str,1
+28,HARP Indicator,str,1
+29,Property Valuation Method,float16,1
+30,floaterest Only (I/O) Indicator,str,1

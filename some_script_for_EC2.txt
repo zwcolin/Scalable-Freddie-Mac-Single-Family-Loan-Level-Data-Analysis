@@ -1,0 +1,8 @@
+cd /mnt/c/Users/ziw029
+sudo ssh -i "dsc102.pem" admin@ec2-34-216-82-65.us-west-2.compute.amazonaws.com
+sudo apt update
+sudo apt install python3-pip
+pip3 install "dask[complete]"
+export PATH='/home/admin/.local/bin'
+sudo ssh -i "dsc102.pem" -L 8787:localhost:8787 admin@ec2-34-216-82-65.us-we
+st-2.compute.amazonaws.com

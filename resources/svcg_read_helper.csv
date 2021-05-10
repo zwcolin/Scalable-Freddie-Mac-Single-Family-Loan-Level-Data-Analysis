@@ -1,0 +1,31 @@
+col_idx,name,dtype,length
+0,Loan Sequence Number,str,12
+1,Monthly Reporting Period,float32,6
+2,Current Actual UPB,float64,12
+3,Current Loan Delinquency Status,str,3
+4,Loan Age,float16,3
+5,Remaining Months to Legal Maturity,float16,3
+6,Repurchase Flag,str,1
+7,Modification Flag,str,1
+8,Zero Balance Code,float16,2
+9,Zero Balance Effective Date,float32,6
+10,Current floaterest Rate,float32,8
+11,Current Deferred UPB,float64,12
+12,Due Date of Last Paid Installment (DDLPI),float32,6
+13,MI Recoveries,float64,12
+14,Net Sales Proceeds,str,14
+15,Non MI Recoveries,float64,12
+16,Expenses,float64,12
+17,Legal Costs,float64,12
+18,Mafloatenance and Preservation Costs,float64,12
+19,Taxes and Insurance,float64,12
+20,Miscellaneous Expenses,float64,12
+21,Actual Loss Calculation,float64,12
+22,Modification Cost,float64,12
+23,Step Modification Flag,str,1
+24,Deferred Payment Plan,str,1
+25,Estimated Loan-to-Value (ELTV),float16,4
+26,Zero Balance Removal UPB,float64,12
+27,Delinquent Accrued floaterest,float64,12
+28,Delinquency Due to Disaster,str,1
+29,Borrower Assistance Status Code,str,1

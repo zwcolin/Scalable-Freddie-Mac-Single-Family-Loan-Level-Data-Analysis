@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+historical_data_2009Q1.txt
+historical_data_time_2009Q1.txt
+sample_orig_2009.txt
+sample_svcg_2009.txt
