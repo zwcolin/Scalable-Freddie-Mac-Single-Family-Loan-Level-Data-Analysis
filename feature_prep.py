@@ -158,7 +158,7 @@ def process_data(orig_dir):
 	# Free raw dataframe
 	del orig
 	orig_features = dd.concat(features, axis=1)
-	orig_features.to_parquet("{}_features.parquet".format(orig_dir.split(".")[0]))
+	orig_features.to_parquet(orig_dir.replace(".txt","_features.parquet"))
 	del orig_features
 	return True
 
@@ -172,17 +172,20 @@ if __name__ == "__main__":
 	    sys.exit()
 
 	data_dir = sys.argv[1]
-	dirs = glob(data_dir+"historical_data_[0-9]*.txt")
+	dirs = glob(data_dir+"/historical_data_[0-9]*.txt")
 	for dir in dirs:
 		print("Processing: '{}'".format(dir))
 
 	with Client(n_workers=4, threads_per_worker=2, memory_limit='8GB') as client:
 		rts = [ process_data(dir) for dir in dirs]
 		rts = dask.compute(*rts)
-		print("successful")
-		workers = client.scheduler_info()['workers']
-		workers = list(workers.keys())
-		client.retire_workers(workers = workers)
+		if np.all(rts):
+			print("successful")
+		else:
+			print("something is wrong")
+		# workers = client.scheduler_info()['workers']
+		# workers = list(workers.keys())
+		# client.retire_workers(workers = workers)
 		client.close()
 
 
