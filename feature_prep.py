@@ -176,9 +176,11 @@ if __name__ == "__main__":
 	for dir in dirs:
 		print("Processing: '{}'".format(dir))
 
-	with Client(n_workers=4, threads_per_worker=2, memory_limit='8GB') as client:
-		rts = [ process_data(dir) for dir in dirs]
-		rts = dask.compute(*rts)
+	with Client(n_workers=3, threads_per_worker=2, memory_limit='8GB') as client:
+		# rts = [ process_data(dir) for dir in dirs]
+		# rts = dask.compute(*rts)
+		rts = [ process_data(dir).compute() for dir in dirs]
+		# rts = dask.compute(*rts)
 		if np.all(rts):
 			print("successful")
 		else:
