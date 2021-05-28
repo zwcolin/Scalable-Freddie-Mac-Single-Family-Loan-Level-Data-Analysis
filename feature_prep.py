@@ -205,7 +205,8 @@ if __name__ == "__main__":
 		features = dd.concat(rts, axis=0)
 		features = features.compute()
 
-		fix_name = lambda c:c.replace(" ", "_").replace("(", "[").replace(")", "]").replace(",","_")
+		fix_name = lambda c:c.replace(" ", "_").replace("(", "_")\
+		.replace(")", "_").replace(",","_").replace(".", "_")
 		features.columns = [fix_name(c) for c in features.columns]
 
 		features.to_parquet("features.parquet")
