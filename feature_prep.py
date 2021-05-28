@@ -14,6 +14,8 @@ import logging
 import argparse
 import sys
 import os
+import boto3
+
 warnings.simplefilter(action='ignore', category=Warning)
 logger = logging.getLogger("distributed")
 logger.setLevel(logging.ERROR)
@@ -159,6 +161,29 @@ def process_data(orig_dir):
 	orig_features = dd.concat(features, axis=1)
 	return orig_features
 
+# added code snippet by Colin from boto3 doc
+def upload_file(file_name, bucket, object_name=None):
+    """Upload a file to an S3 bucket
+
+    :param file_name: File to upload
+    :param bucket: Bucket to upload to
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: True if file was uploaded, else False
+    """
+
+    # If S3 object_name was not specified, use file_name
+    if object_name is None:
+        object_name = file_name
+
+    # Upload the file
+    s3_client = boto3.client('s3')
+    try:
+        response = s3_client.upload_file(file_name, bucket, object_name)
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
+
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
 	    print('too many arguments')
@@ -182,7 +207,10 @@ if __name__ == "__main__":
 
 		fix_name = lambda c:c.replace(" ", "_").replace("(", "[").replace(")", "]").replace(",","_")
 		features.columns = [fix_name(c) for c in features.columns]
+
 		features.to_parquet("features.parquet")
+		upload_file("features.parquet", "ds102-dsc01-scratch", "features/features.parquet")
+
 		print("successful")
 		# workers = client.scheduler_info()['workers']
 		# workers = list(workers.keys())
