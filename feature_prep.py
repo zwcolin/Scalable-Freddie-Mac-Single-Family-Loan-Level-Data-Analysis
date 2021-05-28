@@ -13,11 +13,11 @@ import warnings
 import logging
 import argparse
 import sys
+import os
 warnings.simplefilter(action='ignore', category=Warning)
 logger = logging.getLogger("distributed")
 logger.setLevel(logging.ERROR)
-
-@delayed
+	
 def process_data(orig_dir):
 
 	orig_helper = dd.read_csv('resources/orig_read_helper.csv').compute().set_index('col_idx')
@@ -156,11 +156,8 @@ def process_data(orig_dir):
 	# 31. Indicator -> drop, all N
 
 	# Free raw dataframe
-	del orig
 	orig_features = dd.concat(features, axis=1)
-	orig_features.to_parquet(orig_dir.replace(".txt","_features.parquet"))
-	del orig_features
-	return True
+	return orig_features
 
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
@@ -176,15 +173,17 @@ if __name__ == "__main__":
 	for dir in dirs:
 		print("Processing: '{}'".format(dir))
 
-	with Client(n_workers=3, threads_per_worker=2, memory_limit='8GB') as client:
-		# rts = [ process_data(dir) for dir in dirs]
+	with Client(n_workers=6, threads_per_worker=2, memory_limit='8GB') as client:
+		rts = [ process_data(dir) for dir in dirs]
+		# rts = [ process_data(dir).compute() for dir in dirs]
 		# rts = dask.compute(*rts)
-		rts = [ process_data(dir).compute() for dir in dirs]
-		# rts = dask.compute(*rts)
-		if np.all(rts):
-			print("successful")
-		else:
-			print("something is wrong")
+		features = dd.concat(rts, axis=0)
+		features = features.compute()
+
+		fix_name = lambda c:c.replace(" ", "_").replace("(", "[").replace(")", "]").replace(",","_")
+		features.columns = [fix_name(c) for c in features.columns]
+		features.to_parquet("features.parquet")
+		print("successful")
 		# workers = client.scheduler_info()['workers']
 		# workers = list(workers.keys())
 		# client.retire_workers(workers = workers)
