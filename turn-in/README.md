@@ -1,6 +1,7 @@
 # DSC 102 Programming Assignment Code Manual
 ### Author: Colin Wang, Jerry Chan
 ### Standard Approach to Run the Pipeline
+(0. Our S3 bucket name is `ds102-dsc01-scratch` located in `US West (Oregon) us-west-2`)
 1. Run `ec2_initialization.sh` to create a specified EC2 instance. This step will also include `ec2_bootstrap.sh` to install dependencies on that EC2 instance.
 2. Either use `scp` or S3 access (The IAM role for full access to S3 has been included as part of the initialization step) to transfer `feature_prep.py`, `orig_read_helper.csv` (this helps create schema for data) and `data` folder (which contains all orig data for feature engineering) into the EC2 instance.
 3. `ssh` into the EC2 instance, export AWS credentials (this step cannot be included as part of the bootstrap because UCSD constantly refershes the credentials), and then use `python3 feature_prep.py path_of_data` to run the python script. This step will process features and utilize `boto3` to transfer the parquet file into the `features` folder under our S3 bucket root directory.
