@@ -158,7 +158,7 @@ def process_data(orig_dir):
 	# 31. Indicator -> drop, all N
 
 	# Free raw dataframe
-	orig_features = dd.concat(features, axis=1).dropna()
+	orig_features = dd.concat(features, axis=1)
 	return orig_features
 
 # added code snippet by Colin from boto3 doc
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 		rts = [ process_data(dir) for dir in dirs]
 		# rts = [ process_data(dir).compute() for dir in dirs]
 		# rts = dask.compute(*rts)
-		features = dd.concat(rts, axis=0)
+		features = dd.concat(rts, axis=0).reset_index(drop=True).fillna(0)
 		features = features.compute()
 
 		fix_name = lambda c:c.replace(" ", "_").replace("(", "_")\
