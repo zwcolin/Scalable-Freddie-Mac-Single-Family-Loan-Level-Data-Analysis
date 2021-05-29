@@ -158,7 +158,7 @@ def process_data(orig_dir):
 	# 31. Indicator -> drop, all N
 
 	# Free raw dataframe
-	orig_features = dd.concat(features, axis=1)
+	orig_features = dd.concat(features, axis=1).dropna()
 	return orig_features
 
 # added code snippet by Colin from boto3 doc
