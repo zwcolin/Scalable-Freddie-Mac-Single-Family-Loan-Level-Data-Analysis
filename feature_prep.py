@@ -22,7 +22,7 @@ logger.setLevel(logging.ERROR)
 	
 def process_data(orig_dir):
 
-	orig_helper = dd.read_csv('resources/orig_read_helper.csv').compute().set_index('col_idx')
+	orig_helper = dd.read_csv('orig_read_helper.csv').compute().set_index('col_idx')
 	orig_dtypes = orig_helper['dtype'].to_dict()
 	orig_col_names = orig_helper['name'].to_dict()
 	orig = dd.read_csv(orig_dir, sep='|', header=None, dtype=orig_dtypes,blocksize=10000000)
