@@ -1,5 +1,5 @@
 from pyspark.sql.types import DoubleType
-from pyspark.sql.functions import udf
+from pyspark.sql.functions import udf, col
 from pyspark.sql import SparkSession
 from pyspark.ml import Pipeline
 from pyspark.ml.classification import GBTClassifier, LogisticRegression, RandomForestClassifier
