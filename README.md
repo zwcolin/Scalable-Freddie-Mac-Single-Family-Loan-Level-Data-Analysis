@@ -11,3 +11,6 @@
 
 ### A Much More Streamlined Approach to Run the Pipeline
 Note: In this approach, every step will be done on an EMR cluster and no individual EC2 will be created or used.
+
+### Dataflow
+![Dataflow](https://github.com/zwcolin/dsc102-pa/blob/5b2988cd5715330cf8a875e8f0f2a0176b96f31d/turn-in/data_parallelism_pipeline.png)

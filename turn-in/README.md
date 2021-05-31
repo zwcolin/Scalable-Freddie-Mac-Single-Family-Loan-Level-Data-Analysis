@@ -9,3 +9,6 @@
 5. Update the AWS credentials in `emr_initialization.sh`.
 6. Run `emr_initialization.sh` to automatically create an EMR cluster with auto-scaling. All the python scripts will be automatically executed as steps for the cluster. Specifically, this shell will instruct the cluster to execute label generation, feature-label joining, training, predicting, and evalutation once the cluster finishes bootstraping, and will terminate the cluster after all steps are finished.
 7. All the labels can be accessed from parquet files from the `svcg_labels` folder under our S3 bucket root directory. Our saved models and predictions can be accessed from the `model_output` folder under our S3 bucket root directory. In this folder, there will be folders of which the name represents the timestamp (`MM-DD-TT_HH:MM:SS`) of the model creation. Inside each timestamp folder, `models` folder stores our `PySpark` pipeline, and `predictions` folder stores our predictions (in the form of {`Loan Sequence Number`, `label`, `prediction`, `probability`}) on test data. The test data is derived from a 80:20 split from the original dataset, with a seed of `42`.
+
+### Dataflow
+![Dataflow](https://github.com/zwcolin/dsc102-pa/blob/5b2988cd5715330cf8a875e8f0f2a0176b96f31d/turn-in/data_parallelism_pipeline.png)
