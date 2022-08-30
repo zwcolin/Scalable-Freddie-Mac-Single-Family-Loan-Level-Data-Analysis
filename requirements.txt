@@ -3,7 +3,7 @@ dask-glm==0.2.0
 dask-ml==1.9.0
 distributed==2021.4.1
 jupyter==1.0.0
-numpy==1.20.2
+numpy==1.22.0
 pandas==1.2.4
 bokeh==2.3.2
 fastparquet==0.6.3
